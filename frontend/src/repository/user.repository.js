@@ -1,10 +1,10 @@
 import { getToken } from "./tools";
 import agent from '../services/http';
 
-const backUrl = 'https://pokeapi.co/api/v2';
+const backUrl = '//oklm.ebm.nymous.io/api/user';
 
 export async function backendCheckUser() {
-    console.log("Checking user with backend");
+console.log("Checking user with backend");
     let token = getToken();
     console.log("Token is: " + token);
     const req = localCheck(token);
