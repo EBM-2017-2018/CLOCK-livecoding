@@ -26,14 +26,14 @@ function localCheck(token){
         return new Promise(resolve => {
             setTimeout(() => {
                 resolve({authentified: true, userData: {name: "Albert"}});
-            }, 3000);
+            }, 1000);
         });
     }
     else{
         return new Promise(resolve => {
             setTimeout(() => {
                 resolve({authentified: false});
-            }, 3000);
+            }, 1000);
         });
     }
   }

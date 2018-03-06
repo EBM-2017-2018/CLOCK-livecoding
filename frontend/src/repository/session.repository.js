@@ -18,7 +18,7 @@ export async function reqCreateSession(userId) {
 };
 
 export async function reqGetSession(sessionId, userId) {
-    console.log("Getting session");
+    console.log("Getting session: " + sessionId + " with user: " + userId);
     //const req = agent.get(backUrl).query({sessionId: sessionId, userId: userId});
     const req = localGet(sessionId);
     try {
@@ -40,7 +40,7 @@ function localCreate(){
     return new Promise(resolve => {
         setTimeout(() => {
             resolve({status: "ok", sessionId: "abc"});
-        }, 3000);
+        }, 1000);
     });
 }
 
@@ -58,9 +58,9 @@ function localGet(sessionId){
                     ],
                     htmlTxt: "<h1 class=title >Hello</h1>",
                     cssTxt: ".title{ background-color: blue; }",
-                    jsTxt: "<script> </script>"
+                    jsTxt: "Some script"
                 });
-            }, 3000);
+            }, 1000);
         });
     } else {
         return new Promise(resolve => {
@@ -68,7 +68,7 @@ function localGet(sessionId){
                 resolve({
                     status: "not found",
                 });
-            }, 3000);
+            }, 1000);
         });
     }
 }
