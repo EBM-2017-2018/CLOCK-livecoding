@@ -7,10 +7,10 @@ export async function reqCreateSession(userId) {
     //const req = agent.post(backUrl).send({userId: userId});
     const req = localCreate();
     try {
-        const {status, sessionId} = await req;
+        const res = await req;
         console.log("Session created");
-        console.log(sessionId);
-        return { status: status, sessionId: sessionId };
+        console.log(res.sessionId);
+        return res;
     }
     catch(err) {
       console.error(err);
@@ -22,10 +22,14 @@ export async function reqGetSession(sessionId, userId) {
     //const req = agent.get(backUrl).query({sessionId: sessionId, userId: userId});
     const req = localGet(sessionId);
     try {
-        const {status, sessionId} = await req;
-        console.log("Session created");
-        console.log(sessionId);
-        return { status: status, sessionId: sessionId };
+        const res = await req;
+        if (res.status === "ok"){
+            console.log("Session found");
+            return res;
+        } else {
+            console.log("Session not found");
+            return res;
+        }
     }
     catch(err) {
       console.error(err);
