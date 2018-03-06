@@ -1,7 +1,6 @@
 import { getToken } from "./tools";
 import agent from '../services/http';
 
-//const backUrl = "whoknows";
 const backUrl = 'https://pokeapi.co/api/v2';
 
 export async function backendCheckUser() {
@@ -26,7 +25,7 @@ function localCheck(token){
     if(token === "test"){
         return new Promise(resolve => {
             setTimeout(() => {
-                resolve({authentified: true, name: "Albert"});
+                resolve({authentified: true, userData: {name: "Albert"}});
             }, 3000);
         });
     }

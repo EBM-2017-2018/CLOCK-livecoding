@@ -1,41 +1,49 @@
 import React from 'react';
-import {connect} from 'react-redux';
 
-import { checkUser } from '../redux/actions.js';
-
-//import { checkIdentityAsync } from '../repository/tools.js';
+import { backendCheckUser } from '../repository/user.repository';
+import PropTypes from 'prop-types';
 import IsOk from "./IsOk";
 import IsNotOk from "./IsNotOk";
 
 class IdentityResp extends React.PureComponent {
-  componentWillMount() {
-    console.log("IdentityResp mounted");
-    this.props.dispatch(checkUser());
+  static propTypes = {
+    userData: PropTypes.shape({
+      name: PropTypes.string,
+      authentified: PropTypes.bool
+    })
+  };
+
+  state = {
+    userData: {
+      name: ""
+    },
+    authentified: false,
+    requested: false
   }
 
-  userData = {
-    authentified: false,
-    name: ""
-  };
-  render() {
-//    return (
-//    <div>{this.userData.authentified}</div>
+  componentWillMount() {
+    console.log("IdentityResp mounted");
+  }
 
-    if(this.props.authentified){
-      console.log("ok pourtant");
+  async componentDidMount(){
+    const {userData, authentified} = await backendCheckUser();
+    this.setState({userData: userData, authentified: authentified});
+    this.setState({requested: true});
+  }
+
+  render() {
+    if(!this.state.requested){
+      return (
+      <div>Checking User</div>
+      );
+    }
+    if(this.state.authentified){
       return <div>{this.userData.name}<IsOk/></div>;
     }
     else{
       return <IsNotOk/>;
     }
-
   }
 }
 
-//export default IdentityResp;
-
-export default connect((state) => {
-  return {
-    user: state.name,
-  }
-})(IdentityResp);
+export default IdentityResp;

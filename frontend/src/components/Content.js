@@ -1,6 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {Button} from 'material-ui';
+//import {Button} from 'material-ui';
+
+import IdentityResp from './IdentityResp';
 
 class Content extends PureComponent {
   static propTypes = {
@@ -11,12 +13,15 @@ class Content extends PureComponent {
     className: ''
   };
 
+  state = {
+    name: 'Albert',
+  }
+
+
   render() {
     return (
       <div className={this.props.className}>
-        <Button variant="raised" color="secondary">
-          Click me!
-        </Button>
+        <IdentityResp />
       </div>
     )
   }
