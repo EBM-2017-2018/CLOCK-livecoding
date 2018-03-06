@@ -5,7 +5,6 @@ import { backendCheckUser } from '../repository/user.repository';
 import PropTypes from 'prop-types';
 import IsOk from "./IsOk";
 import IsNotOk from "./IsNotOk";
-import UserInterface from "./UserInterface";
 
 const styles = theme => ({
   root: {
@@ -64,7 +63,13 @@ class IdentityResp extends React.PureComponent {
       }
 
       if(this.state.authentified){
-        return <IsOk name={this.state.userData.name} contentOpenSession={this.props.sessionFunc} />;
+        return (
+          <IsOk 
+            name={this.state.userData.name} 
+            contentOpenSession={this.props.sessionFunc} 
+            
+          />
+        );
       } else {
         return <IsNotOk/>;
       }  
