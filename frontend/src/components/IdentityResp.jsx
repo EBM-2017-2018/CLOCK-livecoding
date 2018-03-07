@@ -37,7 +37,6 @@ class IdentityResp extends React.PureComponent {
     },
     authentified: false,
     requested: false,
-    sessionId: ""
   }
 
   componentWillMount() {
@@ -51,29 +50,23 @@ class IdentityResp extends React.PureComponent {
   }
 
   render() {
-    if(this.state.sessionId.length > 0){
-      return(
-        <UserInterface />
+    if(!this.state.requested){
+      return (
+      <div>Checking User</div>
+      );
+    }
+
+    if(this.state.authentified){
+      return (
+        <IsOk 
+          name={this.state.userData.name} 
+          contentOpenSession={this.props.sessionFunc} 
+          
+        />
       );
     } else {
-      if(!this.state.requested){
-        return (
-        <div>Checking User</div>
-        );
-      }
-
-      if(this.state.authentified){
-        return (
-          <IsOk 
-            name={this.state.userData.name} 
-            contentOpenSession={this.props.sessionFunc} 
-            
-          />
-        );
-      } else {
-        return <IsNotOk/>;
-      }  
-    }
+      return <IsNotOk/>;
+    }  
   }
 }
 
