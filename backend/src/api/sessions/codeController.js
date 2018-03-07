@@ -13,7 +13,7 @@ module.exports.findAllUsersOfSession = (req, res) => {
 }; // findAllUsersOfSession
 
 module.exports.findUserCodeWithinSession = (req, res) => {
-  console.log("Getting code from user: " + req.params.userid + " from session: " + req.params.hash);
+  console.log(`Getting code from user: ${req.params.userid} from session: + ${req.params.hash}`);
   Session.find({ hash: req.params.hash }, (err, session) => {
     if (err) {
       return res.send(err);
