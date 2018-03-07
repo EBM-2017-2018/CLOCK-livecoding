@@ -1,7 +1,7 @@
 import { getToken } from "./tools";
-import agent from '../services/http';
+//import agent from '../services/http';
 
-const backUrl = '//oklm.ebm.nymous.io/api/user';
+//const backUrl = '//oklm.ebm.nymous.io/api/user';
 
 export async function backendCheckUser() {
 console.log("Checking user with backend");

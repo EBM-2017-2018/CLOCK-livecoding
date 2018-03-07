@@ -1,6 +1,5 @@
-import agent from '../services/http';
 
-const backUrl = '//oklm.ebm.nymous.io/api/session';
+//const backUrl = '//oklm.ebm.nymous.io/api/session';
 
 export async function reqCreateSession(userId) {
     console.log("Creating session");

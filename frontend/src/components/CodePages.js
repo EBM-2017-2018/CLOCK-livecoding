@@ -59,13 +59,13 @@ class CodePage extends PureComponent {
     changeContent = (tabValue) => {
         console.log("Changed tab: " + tabValue)
         if (tabValue === 0){
-            console.log("Changed for: " + "html");
+            console.log("Changed for: html");
             this.setState({selectedKey: "htmlTxt"});
         } else if (tabValue === 1) {
-            console.log("Changed for: " + "css");
+            console.log("Changed for: css");
             this.setState({selectedKey: "cssTxt"});
         } else if (tabValue === 2) {
-            console.log("Changed for: " + "js");
+            console.log("Changed for: js");
             this.setState({selectedKey: "jsTxt"});
         }
     }

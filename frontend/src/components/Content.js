@@ -39,7 +39,7 @@ class Content extends PureComponent {
   };
 
   openSession = (htmlTxt, cssTxt, jsTxt, sessionId, users) => {
-    console.log("Session opened" + " (html: " + htmlTxt + ", css: " + cssTxt + ", js: " + jsTxt + ", sessionId: " + sessionId);
+    console.log("Session opened (html: " + htmlTxt + ", css: " + cssTxt + ", js: " + jsTxt + ", sessionId: " + sessionId);
     this.setState({htmlTxt, cssTxt, jsTxt, sessionId, users});
   };
 
