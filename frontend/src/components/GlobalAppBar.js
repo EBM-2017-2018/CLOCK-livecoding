@@ -2,12 +2,11 @@ import React, {PureComponent} from 'react';
 import {findDOMNode} from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {AppBar, IconButton, CardMedia, Toolbar, Tooltip, Typography, withStyles} from 'material-ui';
+import {AppBar, IconButton, Toolbar, Tooltip, Typography, withStyles} from 'material-ui';
 import {Apps as AppsIcon} from 'material-ui-icons';
 
 import AppsMenu from './AppsMenu';
 
-import SvgIcon from 'material-ui/SvgIcon';
 import logo from '../images/logo.png';
 
 const styles = {
@@ -61,7 +60,7 @@ class GlobalAppBar extends PureComponent {
     return (
       <AppBar position="absolute" className={appBarClasses}>
         <Toolbar>
-          <img src={logo} width="50px" height="50px" className={classes.icon} />        
+          <img src={logo} alt="ClockLC-logo" width="50px" height="50px" className={classes.icon} />        
           
           <Typography variant="title" color="inherit" className={classes.flex}>
             {this.props.appTitle}
