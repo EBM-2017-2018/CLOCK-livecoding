@@ -5,9 +5,9 @@ const createUrl = '/api/sessions';
 
 export async function reqCreateSession(userId) {
     console.log("Creating session");
-    const req = agent.local.post(createUrl).send({creatorid: userId});
+    const req = agent.online.post(createUrl).send({creatorid: userId});
     try {
-        const { body } = await req;
+        const body = await req;
         console.log("Session created");
         console.log(body);
         return body;

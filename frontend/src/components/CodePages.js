@@ -1,8 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, TextField } from 'material-ui';
+import { withStyles } from 'material-ui';
 
-import brace from 'brace';
 import AceEditor from 'react-ace';
 
 import 'brace/mode/html';
