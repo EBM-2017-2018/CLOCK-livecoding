@@ -34,7 +34,7 @@ function localGetSession(url){
     const [, , , sessionId, userId] = url.split("/");
     console.log(sessionId);
     if(sessionId === "test"){
-        if (userId == "alex") {
+        if (userId === "alex") {
             return new Promise(resolve => {
                 setTimeout(() => {
                     resolve({
@@ -67,7 +67,7 @@ function localGetSession(url){
                     });
                 }, 1000);
             });
-        } else if (userId == "remy") {
+        } else if (userId === "remy") {
             return new Promise(resolve => {
                 setTimeout(() => {
                     resolve({
