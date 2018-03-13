@@ -33,8 +33,13 @@ class UsersMenu extends PureComponent {
       {
         id: "alex",
         lastName: "Martin",
-        firstName: "Alex"
-      }
+        firstName: "Alex",
+      },
+      {
+        id: "remy",
+        lastName: "Prioul",
+        firstName: "Remy",
+      },
     ]
   };
 
