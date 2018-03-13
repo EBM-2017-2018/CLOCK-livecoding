@@ -58,7 +58,7 @@ class IsOk extends React.PureComponent {
     const res = await reqGetSession(this.state.sessionId, this.props.user.userid);
     if (res.success) {
       console.log("Session found");
-      this.props.contentOpenSession(res.result.code.html, res.result.code.css, res.result.code.js, res.result.hash, res.result.users);//, res.result.name);
+      this.props.contentOpenSession(res.result.code.html, res.result.code.css, res.result.code.js, res.result.hash, res.result.users, res.result.name);
     } else {
       alert(res.msg);
       console.log(`Error: ${res.msg}`);
