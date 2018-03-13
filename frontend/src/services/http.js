@@ -1,15 +1,16 @@
 import agent from 'superagent';
 
-function localCreateSession(userid){
+function localCreateSession(userid, sessionName){
     return new Promise(resolve => {
         setTimeout(() => {
             resolve({
                 body: {
-                    status: "ok",
+                    success: true,
                     session: {
                         creatorid: userid,
                         hash: "newSession",
                         created: Date.now(),
+                        name: sessionName,
                         users:[
                             {
                                 user:{
@@ -30,39 +31,36 @@ function localCreateSession(userid){
 }
 
 function localGetSession(url){
-    const [,,,sessionId, userId] = url.split("/");
+    const [, , , sessionId, userId] = url.split("/");
     console.log(sessionId);
     if(sessionId === "test"){
         return new Promise(resolve => {
             setTimeout(() => {
                 resolve({
                     body: {
-                        status: "ok",
-                        session: {
-                            creatorid: userId,
-                            hash: "newSession",
+                        success: true,
+                        result: {
+                            hash: sessionId,
+                            creatorid: "remy",
                             created: Date.now(),
+                            name: "Frontend - Backend 2018",
                             users:[
                                 {
-                                    user:{
-                                        userid: userId,
-                                        firstName: "Alex",
-                                        lastName: "Martin",
-                                    },
+                                    userid: userId,
+                                    firstName: "Alex",
+                                    lastName: "Martin",
                                 },
                                 {
-                                    user:{
-                                        userid: userId,
-                                        firstName: "Remy",
-                                        lastName: "Prioul",
-                                    },
+                                    userid: userId,
+                                    firstName: "Remy",
+                                    lastName: "Prioul",
                                 },
                             ],
-                        },
-                        code: {
-                            html: "<h1 class=title >Hello</h1>",
-                            css: ".title{ background-color: blue; }",
-                            js: "Some script"
+                            code: {
+                                html: "<h1 class=title >Hello</h1>",
+                                css: ".title{ background-color: blue; }",
+                                js: "Some script"
+                            },
                         },
                     },
                 });
@@ -73,7 +71,8 @@ function localGetSession(url){
             setTimeout(() => {
                 resolve({
                     body: {
-                        status: "not found",                        
+                        success: false,
+                        msg: 'Session does not exist',
                     },
                 });
             }, 1000);
@@ -128,9 +127,11 @@ const choiceAgent = {
             }
         },
         post: (url) => {
-            return {
-                send: (params) => {
-                    return localCreateSession()
+            if (url.startsWith('/api/sessions')) {
+                return {
+                    send: (params) => {
+                        return localCreateSession()
+                    }
                 }
             }
         }
