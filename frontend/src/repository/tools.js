@@ -4,7 +4,7 @@ export const getToken = () => {
     let dctArgs = {};
 
     args.forEach((str)=>{
-        if(str.split("=").length === 2){
+        if(str.split("=").length >= 2){
             let key = str.split("=")[0];
             let value = str.split("=")[1];
             dctArgs[key] = value;
