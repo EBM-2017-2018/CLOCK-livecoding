@@ -69,8 +69,6 @@ class IsOk extends React.PureComponent {
       css: "",
       js: "",
     }
-    console.log("HERE");
-    console.log(res);
     this.openSession(res, "created");
   }
 
