@@ -93,13 +93,25 @@ class Content extends PureComponent {
 
   openNewUser = async (username) => {
     console.log(`Getting new user's code: ${username}`);
+    var alreadySet = false;
+
+    this.state.usersCodes.forEach((code) => {
+      if (code.username === username) {
+        alreadySet = true;
+      }
+    })
+
+    if (alreadySet) {
+      return;
+    }
+
     const res = await getUserCode(this.state.session.hash, username);
     console.log("Result: ");
     console.log(res);
 
     if (res.success) {
-      const { user } = res;
-      this.addUserCode(user.username, user.prenom, res.html, res.css, res.js);
+      const { user } = res.result;
+      this.addUserCode(user.user.username, user.user.prenom, user.html, user.css, user.js);
     } else {
       console.log(res.message);
       alert(res.message);
