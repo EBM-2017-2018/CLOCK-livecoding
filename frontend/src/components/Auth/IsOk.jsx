@@ -64,6 +64,13 @@ class IsOk extends React.PureComponent {
 
   createSession = async () => {
     const res = await reqCreateSession("userid");
+    res.result.code = {
+      html: "", 
+      css: "",
+      js: "",
+    }
+    console.log("HERE");
+    console.log(res);
     this.openSession(res, "created");
   }
 
