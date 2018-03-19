@@ -60,7 +60,7 @@ module.exports.findUserSessionInfo = (req, res) => {
   });
 }; // findUserSessionInfo
 
-module.exports.putNewCodeForUserWithinSession = (req, res) => {
+module.exports.updateCodeInSession = (req, res) => {
   console.log(`Updating the code for user ${req.user.username} in session ${req.params.hash}`);
   const { html, css, js } = req.body;
   let usersUpdate = {};

@@ -19,7 +19,7 @@ router.post('/', sessionController.create);
 // put requests
 router.put('/:hash/user', sessionController.insertNewUser);
 
-router.put('/code/:hash', codeController.putNewCodeForUserWithinSession);
+router.put('/code/:hash', codeController.updateCodeInSession);
 
 // delete requests
 router.delete('/:hash', sessionController.delete);
