@@ -45,7 +45,7 @@ module.exports.findOne = (req, res) => {
 
 module.exports.create = (req, res) => {
   console.log(`Creating session with user, having this username: ${req.user.username}`);
-  const result = {};
+  //  const result = {};
   const {
     username, role, nom, prenom, email,
   } = req.user;
@@ -69,14 +69,13 @@ module.exports.create = (req, res) => {
       return res.send(err);
     }
 
-/*
+    /*
     result.hash = session.hash;
     result.creator = session.creator;
     result.created = session.created;
     result.name = session.name;
     result.users = session.users;
-*/
-    result = session;
+    */
     return res.send({
       success: true,
       result: session,
