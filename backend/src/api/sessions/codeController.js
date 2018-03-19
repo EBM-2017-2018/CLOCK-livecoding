@@ -11,7 +11,7 @@ module.exports.findAllUsersOfSession = (req, res) => {
       return res.status(401)
         .send({
           success: false,
-          msg: 'Session does not exist',
+          message: 'Session does not exist',
         });
     }
     const users = session.users.map(obj => obj.user);
@@ -33,7 +33,7 @@ module.exports.findUserSessionInfo = (req, res) => {
       return res.status(401)
         .send({
           success: false,
-          msg: 'Session does not exist',
+          message: 'Session does not exist',
         });
     }
     result.success = true;
@@ -71,7 +71,7 @@ module.exports.findUserCode = (req, res) => {
       return res.status(401)
         .send({
           success: false,
-          msg: 'Session does not exist',
+          message: 'Session does not exist',
         });
     }
     result.success = true;
@@ -100,7 +100,7 @@ module.exports.updateCodeInSession = (req, res) => {
       return res.status(401)
         .send({
           success: false,
-          msg: 'Session does not exist',
+          message: 'Session does not exist',
         });
     }
     usersUpdate = session.users.map((userWithCode) => {
@@ -128,14 +128,12 @@ module.exports.updateCodeInSession = (req, res) => {
         return res.status(401)
           .send({
             success: false,
-            msg: 'Session does not exist',
+            message: 'Session does not exist',
           });
       }
       return res.send({
-        result: {
-          success: true,
-          session,
-        },
+        success: true,
+        session,
       });
     },
   );
