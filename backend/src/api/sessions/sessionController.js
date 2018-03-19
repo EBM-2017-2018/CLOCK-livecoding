@@ -68,14 +68,18 @@ module.exports.create = (req, res) => {
     if (err) {
       return res.send(err);
     }
-    result.success = true;
+
+/*
     result.hash = session.hash;
     result.creator = session.creator;
     result.created = session.created;
     result.name = session.name;
+    result.users = session.users;
+*/
+    result = session;
     return res.send({
       success: true,
-      result,
+      result: session,
     });
   });
 }; // create
