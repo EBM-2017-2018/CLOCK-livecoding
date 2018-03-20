@@ -1,5 +1,7 @@
 const Session = require('./sessionModel');
 const fs = require('fs');
+// const archiver = require('archiver');
+const cp = require('child_process');
 
 module.exports = {};
 
@@ -148,14 +150,18 @@ module.exports.downloadUserCode = (req, res) => {
   const fileName = `${dt.getFullYear()}_${(dt.getMonth() + 1)}_${dt.getDate()}_${req.params.hash}_${req.user.username}`;
 
   // function that will write the files down in temp folder before zippping
-  const writeFile = (newFileName) => {
-    fs.writeFile('/tmp/test', 'Hey there!', (err) => {
-      if (err) {
-        return console.log(err);
-      }
-      console.log(`The file ${newFileName} was saved!`);
-    });
-  }; // writeFile
+  const writeFile = (newFileName, extension, str) => fs.writeFile(`/tmp/${newFileName}/${newFileName}.${extension}`, str, (err) => { // eslint-disable-line
+  // need to disable next line because this fucker won't understand
+  // that I don't want to return anything on success
+    if (err) {
+      return res.status(400)
+        .send({
+          success: false,
+          message: 'Failure while building zip archive',
+        });
+    }
+    console.log(`The file ${newFileName}.${extension} was saved!`);
+  }); // writeFile
 
   const baseHtmlTemplate = '<!doctype html>\n' +
     '<html>\n\t' +
@@ -171,11 +177,10 @@ module.exports.downloadUserCode = (req, res) => {
   htmlFile.replace('</head>\n\t', `<link rel="stylesheet" href="./${fileName}.css" />\n\t</head>\n\t`);
   htmlFile.replace('</head>\n\t', `<script src="./${fileName}.js"></script>\n\t</head>\n\t`);
 
-  fs.writeFile('/tmp/test', 'Hey there!', (err) => {
-    if (err) {
-      return console.log(err);
-    }
+  writeFile(fileName, 'html', htmlFile);
+  writeFile(fileName, 'css', css);
+  writeFile(fileName, 'js', js);
 
-    console.log(`The file ${fileName}was saved!`);
-  });
+  // delete folder once the deed is done
+  cp.exec(`rm -Rf /tmp/${fileName}`);
 }; // downloadUserCode
