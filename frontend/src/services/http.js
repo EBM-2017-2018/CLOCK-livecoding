@@ -234,7 +234,7 @@ const choiceAgent = {
             if (url === '/api/users') {
                 return localCheckUser();
             }
-            if (url.startsWith("/api/sessions/code") && url.split('/').length == 6) {
+            if (url.startsWith("/api/sessions/code")) {
                 return getUserCode(url);
             }
         },
