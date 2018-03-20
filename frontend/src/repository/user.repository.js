@@ -1,7 +1,7 @@
 import agent from '../services/http';
 
 const usersUrl = '/api/users';
-const sessionUrl = '/api/sessions';
+const sessionUrl = '/api/sessions/code';
 //const backUrl = 'https://requestb.in/ye13r9ye';
 
 export async function backendCheckUser() {
@@ -18,9 +18,9 @@ export async function backendCheckUser() {
     }
 };
 
-export async function getUserCode(sessionId, userName) {
-    console.log(`Getting new user's code, user: ${userName}, session: ${sessionId}`);
-    const req = agent.local.get(sessionUrl + "/" + sessionId + "/" + userName);
+export async function getUserCode(sessionHash, username) {
+    console.log(`Getting new user's code, user: ${username}, session: ${sessionHash}`);
+    const req = agent.online.get(sessionUrl + "/" + sessionHash + "/" + username);
     try {
         const { body } = await req;
         console.log(body);
