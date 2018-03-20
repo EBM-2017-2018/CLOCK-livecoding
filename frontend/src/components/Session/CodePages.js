@@ -40,6 +40,7 @@ class CodePage extends PureComponent {
             js: PropTypes.string,
         })).isRequired,
         sessionHash: PropTypes.string.isRequired,
+        removeUser: PropTypes.func.isRequired,
     };
 
     static defaultProps = {
