@@ -90,6 +90,19 @@ module.exports.insertNewUser = (req, res) => {
   } = req.user;
   const result = {};
 
+  Session.update(
+    { hash: req.params.hash },
+    {
+      $pull: {
+        users: {
+          user: {
+            username,
+          },
+        },
+      },
+    },
+  );
+
   Session.findOneAndUpdate(
     { hash: req.params.hash },
     {
@@ -105,7 +118,6 @@ module.exports.insertNewUser = (req, res) => {
         },
       },
     },
-    { upsert: true },
     (err, session) => {
       if (err) {
         return res.send(err);
