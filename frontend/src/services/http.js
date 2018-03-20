@@ -255,13 +255,6 @@ const choiceAgent = {
                     }
                 }
             }
-            if (url.startsWith('/api/sessions')) {
-                return {
-                    send: (params) => {
-                        return localCreateSession()
-                    }
-                }
-            }
         },
     },
     online: {
