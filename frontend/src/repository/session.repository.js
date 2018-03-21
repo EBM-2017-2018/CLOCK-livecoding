@@ -18,7 +18,7 @@ export async function reqCreateSession(sessionName) {
 
 export async function reqGetSession(sessionId) {
     console.log("Getting session: " + sessionId);
-    const req = agent.online.put(`${getUrl}/${sessionId}/user`).send();
+    const req = agent.online.put(`${getUrl}/user/${sessionId}`).send();
     try {
         const { body } = await req;
         console.log(body);

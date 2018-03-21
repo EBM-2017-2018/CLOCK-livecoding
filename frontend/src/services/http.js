@@ -43,7 +43,7 @@ function localCreateSession(userid, sessionName){
 
 function localGetSession(url){
     console.log(url);
-    const [, , , sessionId, ] = url.split("/");
+    const [, , , , sessionId] = url.split("/");
     const userId = "alex";
     console.log(sessionId);
     if(sessionId === "test"){
