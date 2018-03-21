@@ -3,6 +3,7 @@ const Session = require('./sessionModel');
 module.exports = {};
 
 module.exports.findAll = (req, res) => {
+  console.log('Retrieving all sessions');
   Session.find({}, (err, sessions) => {
     if (err) {
       return res.send(err);
@@ -85,73 +86,90 @@ module.exports.create = (req, res) => {
 }; // create
 
 module.exports.insertNewUser = (req, res) => {
+  console.log(`Inserting new user ${req.user.username} in session ${req.params.hash} if not already present`);
   const {
     username, role, nom, prenom, email,
   } = req.user;
   const result = {};
 
-  Session.update(
-    { hash: req.params.hash },
-    {
-      $pull: {
-        users: {
-          user: {
-            username,
+  Session.findOne({ hash: req.params.hash }, (err, session) => {
+    if (err) {
+      return res.send(err);
+    }
+    if (!session) {
+      return res.send({
+        success: false,
+        message: 'Session does not exist',
+      });
+    }
+    result.hash = session.hash;
+    result.creator = session.creator;
+    result.created = session.created;
+    result.name = session.name;
+
+    result.users = [];
+    session.users.forEach((usr) => {
+      if (usr.user.username === req.user.username) {
+        result.code = {
+          hmtl: usr.html,
+          css: usr.css,
+          js: usr.js,
+        };
+      }
+      return result.users.push(usr.user);
+    });
+
+    if (!result.code) {
+      return Session.findOneAndUpdate(
+        { hash: req.params.hash },
+        {
+          $push: {
+            users: {
+              user: {
+                username,
+                role,
+                nom,
+                prenom,
+                email,
+              },
+            },
           },
         },
-      },
-    },
-  );
-
-  Session.findOneAndUpdate(
-    { hash: req.params.hash },
-    {
-      $push: {
-        users: {
-          user: {
+        (err2, session2) => {
+          if (err2) {
+            return res.send(err2);
+          }
+          if (!session2) {
+            return res.send({
+              success: false,
+              message: 'Session does not exist',
+            });
+          }
+          result.code = {
+            html: '',
+            css: '',
+            js: '',
+          };
+          result.users.push({
             username,
             role,
             nom,
             prenom,
             email,
-          },
-        },
-      },
-    },
-    (err, session) => {
-      if (err) {
-        return res.send(err);
-      }
-      if (!session) {
-        return res.status(401)
-          .send({
-            success: false,
-            message: 'Session does not exist',
           });
-      }
-      result.hash = session.hash;
-      result.creator = session.creator;
-      result.created = session.created;
-      result.name = session.name;
-
-      result.users = [];
-      session.users.forEach((usr) => {
-        if (usr.user.username === req.user.username) {
-          result.code = {
-            hmtl: usr.html,
-            css: usr.css,
-            js: usr.js,
-          };
-        }
-        return result.users.push(usr.user);
-      });
-      return res.send({
-        success: true,
-        result,
-      });
-    },
-  );
-}; // inseertNewUser
+          return res.send({
+            success: true,
+            result,
+          });
+        },
+      );
+    }
+    return res.send({
+      success: true,
+      result,
+    });
+  });
+}; // insertNewUser
 
 module.exports.removeUser = (req, res) => {
   const {
