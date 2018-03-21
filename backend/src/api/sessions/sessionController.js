@@ -78,9 +78,6 @@ module.exports.create = (req, res) => {
     hash: randomValueBase64(6),
   });
 
-  
-  session.hash = session.hash;
-
   session.save((err) => {
     if (err) {
       return res.send(err);
