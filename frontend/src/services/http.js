@@ -1,7 +1,8 @@
 import agent from 'superagent';
 import { checkAuthResponse, getAuthHeaders } from 'ebm-auth/dist/browser';
 
-const base = "https://clock-livecoding.ebm.nymous.io";
+//const base = "https://clock-livecoding.ebm.nymous.io";
+const base = "";
 
 function localCreateSession(userid, sessionName){
     return new Promise(resolve => {
