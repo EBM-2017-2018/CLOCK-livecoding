@@ -101,19 +101,39 @@ class Content extends PureComponent {
     });
     this.setState({usersCodes: usersC});
   }
-    
-  openNewUser = async (username) => {
-    console.log(`Getting new user's code: ${username}`);
-    var alreadySet = false;
+  
+  userAlreadyLoaded = (username) => {
+    var res = false;
 
     this.state.usersCodes.forEach((code) => {
       if (code.username === username) {
-        alreadySet = true;
+        res = true;
       }
     })
+    return res;
+  }
 
-    if (alreadySet) {
+  userNotWatchable = (user) => {
+    if (user.role === 'intervenant') {
+      return true;
+    } else if (this.currentUser.role === 'intervenant' || this.currentUser.role === 'administrateur') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  openNewUser = async (user) => {
+    const {username} = user;
+    console.log(`Getting new user's code: ${username}`);
+
+    if (this.userAlreadyLoaded(username)) {
       console.log(`Code already here`);
+      return;
+    }
+
+    if (this.userNotWatchable(user)) {
+      console.log(`You do not have permission to see `);
       return;
     }
 
@@ -170,6 +190,7 @@ class Content extends PureComponent {
             codes={usersCodes}
             sessionHash={session.hash}
             removeUser={this.removeUserCode}
+            currUserRole={this.props.currentUser.role}
           />
         </div>
       );
