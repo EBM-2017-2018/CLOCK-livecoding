@@ -136,7 +136,6 @@ class Content extends PureComponent {
     console.log(`Session opened (html: ${code.html}, css: ${code.css}, js: ${code.js}, sessionHash: ${hash}, sessionName: ${name}, users: `);
     console.log(users);
 
-    const html = code.html || code.hmtl;
     this.addUserCode(this.state.currentUser.username, "Mon espace", html, code.css, code.js);
 
     this.setState({session: {opened: true, hash, name}, users: users});
