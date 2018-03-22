@@ -18,9 +18,9 @@ export async function backendCheckUser() {
     }
 };
 
-export async function getUserCode(sessionHash, username) {
-    console.log(`Getting new user's code, user: ${username}, session: ${sessionHash}`);
-    const req = agent.online.get(sessionUrl + "/" + sessionHash + "/" + username);
+export async function getUserCode(sessionId, userName) {
+    console.log(`Getting new user's code, user: ${userName}, session: ${sessionId}`);
+    const req = agent.online.get(`${sessionUrl}/${sessionId}/${userName}`);
     try {
         const { body } = await req;
         console.log(body);
