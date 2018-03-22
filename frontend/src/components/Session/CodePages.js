@@ -108,9 +108,9 @@ class CodePage extends PureComponent {
     }
 
     handleChange = (code) => {
+        const slctUser = this.state.selectedUser;
         if (slctUser === 0 || this.props.currUserRole === "intervenant") {
             var users = this.state.users.slice();
-            const slctUser = this.state.selectedUser;
             const key = users[slctUser].selectedKey;
             users[slctUser][key] = code;
             this.setState( {users: users} );

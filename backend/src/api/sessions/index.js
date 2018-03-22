@@ -21,7 +21,7 @@ router.post('/', sessionController.create);
 // put requests
 router.put('/user/:hash', sessionController.insertNewUser);
 
-//router.put('/code/:hash', codeController.updateCodeInSession);
+// router.put('/code/:hash', codeController.updateCodeInSession);
 router.put('/code/:hash/:username', codeController.updateCodeInSession);
 
 // delete requests
