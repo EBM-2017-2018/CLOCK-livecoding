@@ -1,13 +1,5 @@
 const mongoose = require('mongoose');
-const crypto = require('crypto');
 
-const randomValueBase64 = (len) => {
-  const randBytes = crypto.randomBytes(Math.ceil((len * 3) / 4));
-  return randBytes.toString('base64')
-    .slice(0, len)
-    .replace(/\+/g, '0')
-    .replace(/\//g, '0');
-}; // randomValueBase64
 
 const { Schema } = mongoose;
 
@@ -56,7 +48,7 @@ const codeUserWithinSession = new Schema({
 const sessionSchema = new Schema({
   hash: {
     type: String,
-    default: randomValueBase64(6),
+    required: true,
   },
   created: {
     type: Date,
