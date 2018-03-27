@@ -51,7 +51,7 @@ class TabBar extends PureComponent {
 
   render() {
     var tabVal;
-    const {classes, withButtons} = this.props;
+    const {classes} = this.props;
 
     if (typeof this.props.forcedTab !== 'undefined') {
       tabVal = this.props.forcedTab;
