@@ -323,7 +323,7 @@ router.put('/user/:hash', sessionController.insertNewUser);
  *
  * @apiError (401) session session does not exist
  */
-router.put('/code/:hash', codeController.updateCodeInSession);
+router.put('/code/:hash/:username', codeController.updateCodeInSession);
 
 // delete requests
 /**

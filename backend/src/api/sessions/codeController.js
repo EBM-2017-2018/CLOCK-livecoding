@@ -6,7 +6,11 @@ module.exports.findAllUsersOfSession = (req, res) => {
   console.log(`Retrieving all users from session ${req.params.hash}`);
   Session.find({ hash: req.params.hash }, (err, session) => {
     if (err) {
-      return res.send(err);
+      return res.status(401)
+        .send({
+          success: false,
+          message: err.message,
+        });
     }
     if (!session) {
       return res.status(401)
@@ -28,7 +32,11 @@ module.exports.findUserSessionInfo = (req, res) => {
   const result = {};
   Session.findOne({ hash: req.params.hash }, (err, session) => {
     if (err) {
-      return res.send(err);
+      return res.status(401)
+        .send({
+          success: false,
+          message: err.message,
+        });
     }
     if (!session) {
       return res.status(401)
@@ -66,7 +74,11 @@ module.exports.findUserCode = (req, res) => {
   const result = {};
   Session.findOne({ hash: req.params.hash }, (err, session) => {
     if (err) {
-      return res.send(err);
+      return res.status(401)
+        .send({
+          success: false,
+          message: err.message,
+        });
     }
     if (!session) {
       return res.status(401)
@@ -75,13 +87,23 @@ module.exports.findUserCode = (req, res) => {
           message: 'Session does not exist',
         });
     }
-    result.success = true;
 
     session.users.forEach((usr) => {
       if (usr.user.username === req.params.username) {
         result.user = usr;
       }
     });
+
+    if (result.user.role !== 'intervenant'
+      && req.user.role !== 'intervenant'
+      && req.user.role !== 'administrateur') {
+      res.status(401)
+        .send({
+          success: false,
+          message: 'Update not allowed',
+        });
+    }
+
     return res.send({
       success: true,
       result,
@@ -92,10 +114,25 @@ module.exports.findUserCode = (req, res) => {
 module.exports.updateCodeInSession = (req, res) => {
   console.log(`Updating the code for user ${req.user.username} in session ${req.params.hash}`);
   const { html, css, js } = req.body;
+
+  if (req.user.username !== req.params.username
+    && req.user.role !== 'intervenant'
+    && req.user.role !== 'administrateur') {
+    res.status(401)
+      .send({
+        success: false,
+        message: 'Update not allowed',
+      });
+  }
+
   let updatedUsers = {};
   Session.findOne({ hash: req.params.hash }, (err, session) => {
     if (err) {
-      return res.send(err);
+      return res.status(401)
+        .send({
+          success: false,
+          message: err.message,
+        });
     }
     if (!session) {
       return res.status(401)
@@ -122,7 +159,11 @@ module.exports.updateCodeInSession = (req, res) => {
       { new: true },
       (err2, session2) => {
         if (err2) {
-          return res.send(err2);
+          return res.status(401)
+            .send({
+              success: false,
+              message: err2.message,
+            });
         }
         if (!session2) {
           return res.status(401)
