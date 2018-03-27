@@ -263,6 +263,7 @@ class Content extends PureComponent {
   };
 
   render() {
+    console.log("RELOAD CONTENT");
     const {className, classes} = this.props;
     const {session, users, usersMenuOpen, anchorEl, usersCodes, currentUser} = this.state;
     if (this.state.session.opened){

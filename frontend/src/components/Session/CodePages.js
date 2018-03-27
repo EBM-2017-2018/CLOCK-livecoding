@@ -91,10 +91,7 @@ class CodePage extends PureComponent {
         'js': 2,
     }
 
-    /** 
-     * Prepare component with props codes
-    */
-    componentWillMount(){
+    refreshUsers = () => {
         const users = this.props.codes.map((user) => {
             user.selectedKey = "html";
             user.codeUpdateOrdered = false;
@@ -105,6 +102,13 @@ class CodePage extends PureComponent {
             users: users,
             selectedUser: 0,
         });
+    }
+
+    /** 
+     * Prepare component with props codes
+    */
+    componentWillMount(){
+        this.refreshUsers();
         console.log(this.state);
         console.log("CodePages will mount with html: " + this.state.users[this.state.selectedUser].html);
     }
@@ -116,6 +120,10 @@ class CodePage extends PureComponent {
     componentDidUpdate(){
         if (this.state.users[this.state.selectedUser].selectedKey ==="render") {
             this.makeIframe();
+        }
+        
+        if (this.state.users.length !== this.props.codes.length) {
+            this.refreshUsers();
         }
     }
 
