@@ -151,7 +151,7 @@ router.get('/code/:hash', codeController.findUserSessionInfo);
 
 /**
  * @apiVersion 1.0.0-SNAPSHOT
- * @api {get} /sessions/code/:hash/: get-user-code
+ * @api {get} /sessions/code/:hash/:username get-user-code
  * @apiDescription récupère les informations d'un utilisateur d'une session
  * @apiName get-user-code
  * @apiGroup User
