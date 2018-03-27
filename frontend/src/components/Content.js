@@ -182,7 +182,7 @@ class Content extends PureComponent {
       return;
     }
 
-    if (this.userNotWatchable(user)) {
+    if (!this.userWatchable(user)) {
       console.log(`You do not have permission to see `);
       return;
     }
