@@ -116,7 +116,7 @@ class Content extends PureComponent {
   userNotWatchable = (user) => {
     if (user.role === 'intervenant') {
       return true;
-    } else if (this.currentUser.role === 'intervenant' || this.currentUser.role === 'administrateur') {
+    } else if (this.state.currentUser.role === 'intervenant' || this.state.currentUser.role === 'administrateur') {
       return true;
     } else {
       return false;
@@ -191,7 +191,7 @@ class Content extends PureComponent {
             codes={usersCodes}
             sessionHash={session.hash}
             removeUser={this.removeUserCode}
-            currUserRole={this.props.currentUser.role}
+            currUserRole={this.state.currentUser.role}
           />
         </div>
       );

@@ -241,6 +241,7 @@ class CodePage extends PureComponent {
                     handleTabChange={this.changeUser}
                     labels={this.props.codes.map( (code) => (code.title))}
                     closable
+                    withButtons
                   />
 
 

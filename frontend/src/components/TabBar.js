@@ -1,9 +1,20 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {AppBar, Tabs, withStyles} from 'material-ui';
+import classNames from 'classnames';
+import {AppBar, Tabs, withStyles, Toolbar} from 'material-ui';
 import ClosableTab from './ClosableTab.js';
+import {Apps as AppsIcon, FileDownload, Refresh} from 'material-ui-icons';
+import Button from 'material-ui/Button';
 
-const styles = {};
+const styles = {
+  righticon: {
+    marginLeft: '5px',
+  },
+  icon:  {
+    marginLeft: '10px',
+    marginRight: '10px',
+  },
+};
 
 class TabBar extends PureComponent {
   static propTypes = {
@@ -11,7 +22,8 @@ class TabBar extends PureComponent {
     labels: PropTypes.arrayOf(PropTypes.string),
     handleTabChange: PropTypes.func,
     forcedTab: PropTypes.number,
-    closable: PropTypes.bool
+    closable: PropTypes.bool,
+    withButtons: PropTypes.bool,
   };
 
   /*static defaultProps = {
@@ -29,6 +41,8 @@ class TabBar extends PureComponent {
 
   render() {
     var tabVal;
+    const {classes, withButtons} = this.props;
+
     if (typeof this.props.forcedTab !== 'undefined') {
       tabVal = this.props.forcedTab;
     } else {
@@ -45,8 +59,25 @@ class TabBar extends PureComponent {
           {this.props.labels.map((label, i) => (
             <ClosableTab label={label} closable={this.props.closable && i !== 0} />
           ))}        
+          
+          { withButtons ?
+            (
+              <Toolbar>
+              <Button className={[classes.button, classes.icon]} variant="raised" color="primary" size="small">
+                Rafraîchir
+                <Refresh color="white" className={classNames(classes.rightIcon)}/>
+              </Button>
+                
+              <Button className={classes.button} variant="raised" color="secondary" size="small">
+                Télécharger
+                <FileDownload className={classNames(classes.rightIcon, classes.iconSmall)} />
+              </Button>
+            </Toolbar>
+            ) : (<div/>)
+          }
+
         </Tabs>  
-        
+
       </AppBar>
     );
   }
