@@ -78,6 +78,40 @@ class Content extends PureComponent {
     this.setState({currentUser: user});
   }
 
+  refreshUser = async (username) => {
+    console.log(`Updating ${username}'s code`);
+    const res = await getUserCode(this.state.session.hash, username);
+
+    console.log("Result: ");
+    console.log(res);
+
+    if (res.success) {
+      const { user } = res.result;
+      this.updateUserCode(user.user.username, user.html, user.css, user.js);
+    } else {
+      console.log(res.message);
+      alert(res.message);
+    }
+  }
+
+  updateUserCode = (username, html, css, js) => {
+    console.log(`Updating user ${username} to Content.state`);
+    var usersC = this.state.usersCodes.slice();
+    var user;
+    for(var i=0; i<usersC.length; i++){
+      user = usersC[i];
+
+      if(user.username === username) {
+        user.html = html;
+        user.css = css;
+        user.js = js;
+        usersC[i] = user;
+      }
+    }
+
+    this.setState({usersCodes: usersC});
+  }
+
   addUserCode = (username, title, html, css, js) => {
     console.log(`Adding user ${username} to Content.state`);
     var usersC = this.state.usersCodes.slice();
@@ -92,7 +126,7 @@ class Content extends PureComponent {
   }
 
   removeUserCode = (username) => {
-    console.log(`Removing user ${username} to Content.state`);
+    console.log(`Removing user ${username} from Content.state`);
     var usersC = [];
     this.state.usersCodes.forEach((user)=>{
       if (user.username !== username) {
@@ -192,6 +226,7 @@ class Content extends PureComponent {
             sessionHash={session.hash}
             removeUser={this.removeUserCode}
             currUserRole={this.state.currentUser.role}
+            refreshFunction={this.refreshUser}
           />
         </div>
       );
