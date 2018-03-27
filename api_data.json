@@ -1,8 +1,227 @@
 [
   {
     "version": "1.0.0-SNAPSHOT",
+    "type": "post",
+    "url": "/sessions",
+    "title": "create-session",
+    "description": "<p>Création d'une session</p>",
+    "name": "create_session",
+    "group": "Session",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "succes",
+            "description": "<p>succès</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "sessionSchema",
+            "optional": false,
+            "field": "result",
+            "description": "<p>l'objet session créé</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"success\": true,\n    \"result\": {\n        \"creator\": {\n            \"username\": \"lhulot\",\n            \"role\": \"etudiant\",\n            \"nom\": \"Hulot\",\n            \"prenom\": \"Louis\",\n            \"email\": \"louishulot@hotmail.fr\",\n            \"_id\": \"5aba4faee534b8001826eaf1\"\n        },\n        \"users\": [\n            {\n                \"user\": {\n                    \"username\": \"lhulot\",\n                    \"role\": \"etudiant\",\n                    \"nom\": \"Hulot\",\n                    \"prenom\": \"Louis\",\n                    \"email\": \"louishulot@hotmail.fr\",\n                    \"_id\": \"5aba4faee534b8001826eaf2\"\n                },\n                \"html\": \"\",\n                \"css\": \"\",\n                \"js\": \"\",\n                \"_id\": \"5aba4faee534b8001826eaf3\"\n            }\n        ],\n        \"name\": \"\",\n        \"hash\": \"MGTdcB\",\n        \"created\": \"2018-03-27T12:46:59.307Z\",\n        \"_id\": \"5aba4faee534b8001826eaf4\",\n        \"__v\": 0\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api/sessions/index.js",
+    "groupTitle": "Session",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/api/sessions"
+      }
+    ]
+  },
+  {
+    "version": "1.0.0-SNAPSHOT",
+    "type": "delete",
+    "url": "/session/:hash",
+    "title": "delete-session",
+    "description": "<p>Supression session</p>",
+    "name": "delete_session",
+    "group": "Session",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>JWT token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n\"Authorization\":\"JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTZmMDlkYzM1YmZkZTBm\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "hash",
+            "description": "<p>hash code de la session</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>succès</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>message de succès</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"success\": true,\n    \"result\": 'session supprimée'\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "session",
+            "description": "<p>session does not exist</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/api/sessions/index.js",
+    "groupTitle": "Session",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/api/session/:hash"
+      }
+    ]
+  },
+  {
+    "version": "1.0.0-SNAPSHOT",
+    "type": "delete",
+    "url": "/session/:hash/user",
+    "title": "delete-user-in-session",
+    "description": "<p>Supression utilisateur</p>",
+    "name": "delete_user_in_session",
+    "group": "Session",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>JWT token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n\"Authorization\":\"JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTZmMDlkYzM1YmZkZTBm\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "hash",
+            "description": "<p>hash code de la session</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>succès</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "userSchemea",
+            "optional": false,
+            "field": "user",
+            "description": "<p>utilisateur supprimé</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"success\": true,\n    \"result\": [userDeleted]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "session",
+            "description": "<p>session does not exist</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/api/sessions/index.js",
+    "groupTitle": "Session",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/api/session/:hash/user"
+      }
+    ]
+  },
+  {
+    "version": "1.0.0-SNAPSHOT",
     "type": "get",
-    "url": "sessions",
+    "url": "/sessions",
     "title": "get-all-sessions",
     "description": "<p>récupère l'ensemble des sessions disponibles</p>",
     "name": "get_all_sessions",
@@ -70,14 +289,14 @@
     "groupTitle": "Session",
     "sampleRequest": [
       {
-        "url": "http://localhost:4000/apisessions"
+        "url": "http://localhost:4000/api/sessions"
       }
     ]
   },
   {
     "version": "1.0.0-SNAPSHOT",
     "type": "get",
-    "url": "sessions/:hash",
+    "url": "/sessions/:hash",
     "title": "get-one-session",
     "description": "<p>récupère la session au hash code envoyé</p>",
     "name": "get_one_session",
@@ -158,7 +377,267 @@
     "groupTitle": "Session",
     "sampleRequest": [
       {
-        "url": "http://localhost:4000/apisessions/:hash"
+        "url": "http://localhost:4000/api/sessions/:hash"
+      }
+    ]
+  },
+  {
+    "version": "1.0.0-SNAPSHOT",
+    "type": "put",
+    "url": "/session/user/:hash",
+    "title": "insert-new-user",
+    "description": "<p>insertion d'un nouvel utilisteur pour la session</p>",
+    "name": "insert_new_user",
+    "group": "Session",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>JWT token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n\"Authorization\":\"JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTZmMDlkYzM1YmZkZTBm\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "hash",
+            "description": "<p>hash code de la session</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>succès</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "result",
+            "description": "<p>objet contenant : hash, creator, created, name, users, code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "result.hash",
+            "description": "<p>hash code de la session</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "userSchema",
+            "optional": false,
+            "field": "result.creator",
+            "description": "<p>créateur de la session</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "date",
+            "optional": false,
+            "field": "result.created",
+            "description": "<p>date de création de la session</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "result.name",
+            "description": "<p>nom de la session</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "array[userSchme]",
+            "optional": false,
+            "field": "result.users",
+            "description": "<p>array des users de la session</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "array[String]",
+            "optional": false,
+            "field": "result.code",
+            "description": "<p>array contenant les codes de l'utilisateur courant</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"success\": true,\n    \"result\": {\n        \"hash\": \"zqEkPX\",\n        \"creator\": {userSchema},\n        \"created\": \"2018-03-22T08:18:23.095Z\",\n        \"name\": \"CLOCK sa mère\",\n        \"users\": [userSchema, userSchema ...],\n        \"code\": {\n            \"html\": \"<html>\\n  <p>\\n      Eloïse arrêtes tes bêtises\\n  </p>\\n</html>\\n\\n\",\n            \"css\": \"p {\\n  color: green;\\n}\",\n            \"js\": \"\"\n        }\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "session",
+            "description": "<p>session does not exist</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/api/sessions/index.js",
+    "groupTitle": "Session",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/api/session/user/:hash"
+      }
+    ]
+  },
+  {
+    "version": "1.0.0-SNAPSHOT",
+    "type": "put",
+    "url": "/session/code/:hash",
+    "title": "update-code-in-session",
+    "description": "<p>mise à jour du code de l'utilisateur</p>",
+    "name": "update_code_in_session",
+    "group": "Session",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>JWT token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n\"Authorization\":\"JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTZmMDlkYzM1YmZkZTBm\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "hash",
+            "description": "<p>hash code de la session</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>succès</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "result",
+            "description": "<p>objet contenant : hash, creator, created, name, users, code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "result.hash",
+            "description": "<p>hash code de la session</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "userSchema",
+            "optional": false,
+            "field": "result.creator",
+            "description": "<p>créateur de la session</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "date",
+            "optional": false,
+            "field": "result.created",
+            "description": "<p>date de création de la session</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "result.name",
+            "description": "<p>nom de la session</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "array[userSchme]",
+            "optional": false,
+            "field": "result.users",
+            "description": "<p>array des users de la session</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "array[String]",
+            "optional": false,
+            "field": "result.code",
+            "description": "<p>array contenant les codes de l'utilisateur courant</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"success\": true,\n    \"result\": {\n        \"hash\": \"zqEkPX\",\n        \"creator\": {userSchema},\n        \"created\": \"2018-03-22T08:18:23.095Z\",\n        \"name\": \"CLOCK sa mère\",\n        \"users\": [userSchema, userSchema ...],\n        \"code\": {\n            \"html\": \"<html>\\n  <p>\\n      Eloïse arrêtes tes bêtises\\n  </p>\\n</html>\\n\\n\",\n            \"css\": \"p {\\n  color: green;\\n}\",\n            \"js\": \"\"\n        }\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "session",
+            "description": "<p>session does not exist</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/api/sessions/index.js",
+    "groupTitle": "Session",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/api/session/code/:hash"
       }
     ]
   },
@@ -235,10 +714,10 @@
   {
     "version": "1.0.0-SNAPSHOT",
     "type": "get",
-    "url": "sessions/code/:hash",
-    "title": "get-all-users-of-session",
-    "description": "<p>récupère l'ensemble des users d'une sessuib</p>",
-    "name": "get_all_users_of_session",
+    "url": "/sessions/code/:hash",
+    "title": "find-use-session-info",
+    "description": "<p>récupère les informations des users de la session</p>",
+    "name": "find_use_session_info",
     "group": "User",
     "header": {
       "fields": {
@@ -358,17 +837,105 @@
     "groupTitle": "User",
     "sampleRequest": [
       {
-        "url": "http://localhost:4000/apisessions/code/:hash"
+        "url": "http://localhost:4000/api/sessions/code/:hash"
       }
     ]
   },
   {
     "version": "1.0.0-SNAPSHOT",
     "type": "get",
-    "url": "sessions/code/:hash/:",
-    "title": "get-one-user-of-session",
-    "description": "<p>récupère les informations d'un utilisateur d'une session</p>",
+    "url": "/sessions/users/:hash",
+    "title": "get-all-users-of-session",
+    "description": "<p>récupère l'ensemble des users d'une sessuib</p>",
     "name": "get_all_users_of_session",
+    "group": "User",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>JWT token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n\"Authorization\":\"JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTZmMDlkYzM1YmZkZTBm\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "hash",
+            "description": "<p>hash code de la session</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>succès</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "array[userSchema]",
+            "optional": false,
+            "field": "arrayUsers",
+            "description": "<p>array des users de la sesison</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"success\": true,\n    \"result\": [userSchema, userSchema ...]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "session",
+            "description": "<p>session does not exist</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/api/sessions/index.js",
+    "groupTitle": "User",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/api/sessions/users/:hash"
+      }
+    ]
+  },
+  {
+    "version": "1.0.0-SNAPSHOT",
+    "type": "get",
+    "url": "/sessions/code/:hash/:username",
+    "title": "get-user-code",
+    "description": "<p>récupère les informations d'un utilisateur d'une session</p>",
+    "name": "get_user_code",
     "group": "User",
     "header": {
       "fields": {
@@ -488,7 +1055,7 @@
     "groupTitle": "User",
     "sampleRequest": [
       {
-        "url": "http://localhost:4000/apisessions/code/:hash/:"
+        "url": "http://localhost:4000/api/sessions/code/:hash/:username"
       }
     ]
   }
