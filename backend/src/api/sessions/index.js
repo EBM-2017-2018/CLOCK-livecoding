@@ -33,7 +33,7 @@ router.get('/', sessionController.findAll);
 /**
  * @apiVersion 1.0.0-SNAPSHOT
  * @api {get} sessions/:hash get-one-session
- * @apiDescription récupère la session au hash code envoyé 
+ * @apiDescription récupère la session au hash code envoyé
  * @apiName get-one-session
  * @apiGroup Session
  * @apiHeader {String} Authorization JWT token
@@ -100,12 +100,12 @@ router.get('/users/:hash', codeController.findAllUsersOfSession);
  * @apiParam {String} hash hash code de la session
  * @apiSuccess {Boolean} success succès
  * @apiSuccess {result} result object contenant hash, creator, created, name, users, code
- * @apiSuccess {String} hash hash code de la session 
- * @apiSuccess {userSchema} creator objet user du créateur de la session
- * @apiSuccess {date} created date de création de la session
- * @apiSuccess {String} name nom de la session
- * @apiSuccess {array[usersSchema]} usesrs array des userSchema de la session
- * @apiSuccess {['html', 'css', 'js']} code tableau contenant le code de la personne qui à fait la requête
+ * @apiSuccess {String} result.hash hash code de la session
+ * @apiSuccess {userSchema} result.creator objet user du créateur de la session
+ * @apiSuccess {date} cresult.reated date de création de la session
+ * @apiSuccess {String} result.name nom de la session
+ * @apiSuccess {array[usersSchema]} result.usesrs array des userSchema de la session
+ * @apiSuccess {['html', 'css', 'js']} result.code tableau contenant le cade
  * @apiSuccessExample {json} Success-Response:
  *{
     "success": true,
@@ -147,16 +147,15 @@ router.get('/code/:hash', codeController.findUserSessionInfo);
  * @apiSuccess {String} result.user.js code js de l'utilisateur
  * @apiSuccess {String} result.user.css code css de l'utilisateur
  * @apiSuccess {userSchema} result.user.user userSchema de l'utilisateur
- 
  * @apiSuccessExample {json} Success-Response:
  *{
     "success": true,
     "result": {
         "success": true,
         "user": {
-            "html": "<p>Click the button to make a BUTTON element.</p>\n\n<button onclick=\"myFunction()\">Try it</button>",
+            "html": "",
             "css": "p {\n  color: red;\n}",
-            "js": "function myFunction() {\n    var btn = document.createElement(\"BUTTON\");\n    document.body.appendChild(btn);\n}",
+            "js": "",
             "user": {
                 "_id": "5ab367455813230018e9e8c0",
                 "username": "amartin",
