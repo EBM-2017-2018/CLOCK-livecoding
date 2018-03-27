@@ -172,7 +172,6 @@ router.get('/code/:hash', codeController.findUserSessionInfo);
  * @apiError (401) session session does not exist
  */
 router.get('/code/:hash/:username', codeController.findUserCode);
-router.get('/download/:hash/:username', codeController.downloadUserCode);
 
 // post requests
 router.post('/', sessionController.create);
