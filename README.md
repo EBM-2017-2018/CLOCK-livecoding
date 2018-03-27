@@ -15,6 +15,19 @@ Il comprend :
 - un frontend en React
 - des tests automatiques grâce à Travis
 
+## Pour commencer et tester
+
+0. Avoir le package manager npm et mongodb déjà installés. Mongo doit être démarré 
+1. `git clone https://github.com/EBM-2017-2018/CLOCK_livecoding.git`
+2. `cd CLOCK_livecoding/frontend`
+3. `npm install`
+4. `cd ../backend`
+5. `npm install`
+6. `npm start`
+7. Ouvrir un autre terminal et vous placer dans CLOCK_livecoding/frontend
+8. `npm start`
+
+
 ## Mode d'emploi
 
 1. `git clone https://github.com/EBM-2017-2018/CLOCK_livecoding.git`
