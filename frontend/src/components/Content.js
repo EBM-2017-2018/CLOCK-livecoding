@@ -9,6 +9,7 @@ import UsersMenu from './Session/UsersMenu';
 import IdentityResp from './Auth/IdentityResp';
 import CodePages from './Session/CodePages';
 import { getUserCode } from '../repository/user.repository';
+import { downloadZip } from '../repository/zip.repository';
 
 const styles = theme => ({
   root: {
@@ -92,6 +93,21 @@ class Content extends PureComponent {
       console.log(res.message);
       alert(res.message);
     }
+  }
+
+  downloadCode = (username) => {
+    console.log(`Getting ${username}'s zipped code`);
+    var usersC = this.state.usersCodes;
+    var user;
+
+    for(var i=0; i<usersC.length; i++){
+      user = usersC[i];
+
+      if(user.username === username) {
+        var {html, css, js} = user;
+      }
+    }
+    downloadZip(html, css, js, username, this.state.session.hash);
   }
 
   updateUserCode = (username, html, css, js) => {
@@ -227,6 +243,7 @@ class Content extends PureComponent {
             removeUser={this.removeUserCode}
             currUserRole={this.state.currentUser.role}
             refreshFunction={this.refreshUser}
+            dwnldFunction={this.downloadCode}
           />
         </div>
       );

@@ -44,6 +44,7 @@ class CodePage extends PureComponent {
         sessionHash: PropTypes.string.isRequired,
         removeUser: PropTypes.func.isRequired,
         refreshFunction: PropTypes.func.isRequired,
+        dwnldFunction: PropTypes.func.isRequired,
     };
 
     static defaultProps = {
@@ -244,6 +245,7 @@ class CodePage extends PureComponent {
                     labels={this.props.codes.map( (code) => ({label: code.title, id: code.username}))}
                     funcRemoveUser={this.props.removeUser}
                     refreshFunction={this.props.refreshFunction}
+                    dwnldFunction={this.props.dwnldFunction}
                 />
 
 

@@ -27,6 +27,7 @@ class TabBar extends PureComponent {
     forcedTab: PropTypes.number,
     funcRemoveUser: PropTypes.func.isRequired,
     refreshFunction: PropTypes.func.isRequired,
+    dwnldFunction: PropTypes.func.isRequired,
   };
 
   state = {
@@ -41,6 +42,11 @@ class TabBar extends PureComponent {
   refreshUser = () => {
     console.log("Refresh asked");
     this.props.refreshFunction(this.props.labels[this.state.selectedTab].id);
+  }
+
+  downloadCode = () => {
+    console.log("Donwload asked");
+    this.props.dwnldFunction(this.props.labels[this.state.selectedTab].id);
   }
 
   render() {
@@ -81,6 +87,7 @@ class TabBar extends PureComponent {
 
             <Button
               className={classes.button}
+              onClick={this.downloadCode}
               variant="raised"
               color="secondary"
               size="small">
