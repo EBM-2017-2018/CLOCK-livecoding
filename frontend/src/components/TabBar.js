@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {AppBar, Tabs, withStyles, Toolbar} from 'material-ui';
 import ClosableTab from './ClosableTab.js';
-import {Apps as AppsIcon, FileDownload, Refresh} from 'material-ui-icons';
+import {FileDownload, Refresh} from 'material-ui-icons';
 import Button from 'material-ui/Button';
 
 const styles = {
@@ -16,7 +16,7 @@ const styles = {
   },
 };
 
-class TabBar extends PureComponent {
+class UsersTabBar extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     labels: PropTypes.arrayOf(PropTypes.string),
@@ -83,4 +83,4 @@ class TabBar extends PureComponent {
   }
 }
 
-export default withStyles(styles)(TabBar);
+export default withStyles(styles)(UsersTabBar);

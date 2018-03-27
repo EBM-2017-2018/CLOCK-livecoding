@@ -10,6 +10,7 @@ import 'brace/theme/tomorrow_night';
 import 'brace/ext/language_tools';
 
 import TabBar from '../TabBar';
+import UsersTabBar from './UsersTabBar';
 import { updateCodes } from '../../repository/session.repository';
 
 const styles = theme => ({
@@ -237,12 +238,11 @@ class CodePage extends PureComponent {
         const user = this.state.users[this.state.selectedUser];
         return (
             <div className={this.props.className}>
-                <TabBar 
+                <UsersTabBar 
                     handleTabChange={this.changeUser}
-                    labels={this.props.codes.map( (code) => (code.title))}
-                    closable
-                    withButtons
-                  />
+                    labels={this.props.codes.map( (code) => ({label: code.title, id: code.username}))}
+                    funcRemoveUser={this.props.removeUser}
+                />
 
 
                 <TabBar
